@@ -5,6 +5,15 @@ import bcrypt from "bcryptjs";
 export const createUser = async (req, res, next) => {
   try {
     const userData = req.body;
+    const findUser = await User.findOne({ email: userData?.email });
+    if(findUser){
+      res.status(400).json({
+        code: 400,
+        status: "Error",
+        message: "Email address already exists!",
+        user,
+      });
+  } else {
     const salt = await bcrypt.genSalt(10);
     userData.password = await bcrypt.hash(req.body.password, salt);
     const user = await User.create(userData);
@@ -14,6 +23,7 @@ export const createUser = async (req, res, next) => {
       message: "User Register successfully!",
       user,
     });
+  }
   } catch (error) {
     next(error);
     res.status(500).json({ code: 500, status: "Error", error });
