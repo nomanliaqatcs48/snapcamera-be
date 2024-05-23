@@ -3,14 +3,9 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-  name: {
-    type: String,
-    unique: false,
-    required: true,
-  },
   email: {
     type: String,
-    unique: false,
+    unique: true,
     match: [
       /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
       "Please fill a valid email address",
@@ -21,10 +16,16 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  subscription_date: {
+    type: String,
+    required: false,
+    default: ""
+  },
+  terms_accepted: {
+    type: Boolean,
+    default: false,
+  }
 },
-// {
-//     timestamps: true,
-// }
 );
 
 export const User = mongoose.model("user", userSchema);
