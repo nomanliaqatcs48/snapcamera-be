@@ -1,4 +1,4 @@
-cryptodeals_backend:
+snapcamera-be:
     stage: deploy
     tags:
       - client-aws
