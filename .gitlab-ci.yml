@@ -1,4 +1,4 @@
-snapcamera-be:
+cryptodeals_backend:
     stage: deploy
     tags:
       - client-aws
@@ -11,6 +11,6 @@ snapcamera-be:
         - echo "Deploy to Client AWS"
         - ssh-add <(echo "$aws_ssh_pri_key")
         - rm -rf .git
-        - ssh -o StrictHostKeyChecking=no snapcamera-be@18.118.177.85 "cd /home/snapcamera-be/snapcamera-be; git reset --hard; git pull origin main; npm install --force; pm2 restart 0; exit"
+        - ssh -o StrictHostKeyChecking=no snapcamera-be@172.31.44.191 "cd /home/snapcamera-be/snapcamera-be; git reset --hard; git pull origin main; npm install --force; pm2 restart 0; exit"
     only:
         - main
