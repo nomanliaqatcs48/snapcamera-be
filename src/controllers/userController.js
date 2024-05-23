@@ -50,14 +50,14 @@ export const userLogin = async (req, res, next) => {
         res.status(400).json({
           code: 400,
           status: "Error",
-          message: "Invalid email/password",
+          message: "Invalid credentials",
         });
       }
     } else {
       res.status(400).json({
         code: 400,
         status: "Error",
-        message: "Invalid email/password",
+        message: "Invalid credentials",
       });
     }
   } catch (error) {
