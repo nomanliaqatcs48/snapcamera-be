@@ -1,16 +1,16 @@
 cryptodeals_backend:
     stage: deploy
     tags:
-      - backend
+      - client-aws
     before_script:
         - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
         - mkdir -p ~/.ssh
         - eval $(ssh-agent -s)
         - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
     script:
-        - echo "Deploy to PM01"
-        - ssh-add <(echo "$SSH_KEY")
+        - echo "Deploy to Client AWS"
+        - ssh-add <(echo "$aws_ssh_pri_key")
         - rm -rf .git
-        - ssh -o StrictHostKeyChecking=no backend@10.10.10.69 "cd /home/backend/backend-cryptodeals; git reset --hard; git pull; pwd; source ~/.nvm/nvm.sh; nvm use 16; npm -v; npm install --force; npm install; pm2 restart 0; exit"
+        - ssh -o StrictHostKeyChecking=no snapcamera-be@18.118.177.85 "cd /home/snapcamera-be/snapcamera-be; git reset --hard; git pull origin main; npm install --force; pm2 restart 0; exit"
     only:
         - main
