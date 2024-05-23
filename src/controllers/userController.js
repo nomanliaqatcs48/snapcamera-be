@@ -84,7 +84,7 @@ export const userUpdate = async (req, res, next) => {
         code: 200,
         status: "Success",
         message: "User date updated!",
-        user: userObject,
+        user,
       });
     } else {
       res.status(400).json({
