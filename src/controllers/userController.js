@@ -10,8 +10,7 @@ export const createUser = async (req, res, next) => {
       res.status(400).json({
         code: 400,
         status: "Error",
-        message: "Email address already exists!",
-        user,
+        message: "Email address already exists!"
       });
   } else {
     const salt = await bcrypt.genSalt(10);
